@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
 		line_number++;
 		commands = get_tokens(line);
 		printf("line number: %d\n", line_number);
-		printf("token1: line[0] %s\n", tokens[0]);
-		printf("token2: line[1] %s\n", tokens[1]);
+		printf("token1: line[0] %s\n", commands[0]);
+		printf("token2: line[1] %s\n", commands[1]);
 	}
 
 
