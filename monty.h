@@ -39,7 +39,27 @@ typedef struct instruction_s
 } instruction_t;
 
 char **get_tokens(char *input);
+void (*get_function(char **token))(stack_t **head, unsigned int line_num);
+stack_t *create_newNode(int n);
 
+void push_onto_stack(stack_t **stack, unsigned int line_number);
+void print_stack(stack_t **stack, unsigned int line_number);
 
+/**
+void print_top_of_stack(stack_t **stack, unsigned int line_number);
+void remove_top_of_stack(stack_t **stack, unsigned int line_number);
+void swap_top2_of_stack(stack_t **stack, unsigned int line_number);
+void add_top2_of_stack(stack_t **stack, unsigned int line_number);
+void do_nothing(stack_t **stack, unsigned int line_number);
 
+	instruction_t opcode_list[] = {
+		{"push", push_onto_stack},
+		{"pall", print_stack},
+		{"pint", print_top_of_stack},
+		{"pop", remove_top_of_stack},
+		{"swap", swap_top2_of_stack},
+		{"add", add_top2_of_stack},
+		{"nop", do_nothing},
+		{NULL, NULL}
+*/		
 #endif

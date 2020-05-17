@@ -8,12 +8,12 @@
  */
 int main(int argc, char *argv[])
 {
-	FILE *monty_file;
-	char *line = NULL;
-	char **commands;
-	size_t len = 0;
-	ssize_t nread;
-	int line_number = 0;
+	FILE *monty_file; /* fopen("file_name", "mode"); stream for getline() */
+	char *line = NULL; /* stores address of buffer containing text from getline() */
+	char **commands; /* stores strtok'd tokens from get_tokens() */
+	unsigned int line_number = 0; /* count number of lines read after getline() looped */
+	size_t len = 0; /*  buffer size of line in bytes from getline() */
+	size_t *stack = NULL;
 
 
 	/* only one arg to program allowed */
@@ -29,49 +29,19 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	/* getline returns #chars read (excluding '\0') */
-	while ((nread = getline(&line, &len, monty_file)) != -1)
+	/* getline reads an entire line from stream, allocates buffer for line */
+	while ((getline(&line, &len, monty_file)) != -1) /* return -1 on failure to read line (including EOF condition) */
 	{
-		printf("Retrieved line of length %zu:\n", nread);
 		line_number++;
 		commands = get_tokens(line);
 		printf("line number: %d\n", line_number);
 		printf("token1: line[0] %s\n", commands[0]);
 		printf("token2: line[1] %s\n", commands[1]);
+		get_function(commands)(&stack, line_number);
 	}
-
 
 	free(line);
+	free(commands);
 	fclose(monty_file);
 	return (0);
-}
-
-/**
- * get_tokens -
- * @input:
- * Return:
- */
-char **get_tokens(char *input)
-{
-	int i;
-	char *str_tok;
-	char **tokens;
-
-	tokens = malloc(sizeof(size_t);
-	if (!tokens)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	str_tok = strtok(input, DELIM);
-
-	i = 0;
-	while (str_tok)
-	{
-		tokens[i] = str_tok;
-		i++;
-		str_tok = strtok(NULL, DELIM);
-	}
-	return (tokens);
 }
