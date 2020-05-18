@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 	char **commands; /* stores strtok'd tokens from get_tokens() */
 	unsigned int line_number = 0; /* count number of lines read after getline() looped */
 	size_t len = 0; /*  buffer size of line in bytes from getline() */
-	size_t *stack = NULL;
+	/* size_t *stack = NULL; */
 
 
 	/* only one arg to program allowed */
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		printf("line number: %d\n", line_number);
 		printf("token1: line[0] %s\n", commands[0]);
 		printf("token2: line[1] %s\n", commands[1]);
-		get_function(commands)(&stack, line_number);
+		get_function(commands);
 	}
 
 	free(line);

@@ -27,33 +27,27 @@ stack_t *create_newNode(int n)
  * @line_number: line number
  */
 
+int int_val = 0;
 void push_onto_stack(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node = malloc(sizeof(stack_t));
-	stack_t *temp;
+	stack_t *node;
 	(void) line_number;
 
-	/* node = create_newNode(line_number); */
-	if (!node)
+	node = create_newNode(int_val);
+	/* if (!node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free(node);
-		exit(EXIT_FAILURE);		
-	}
-	/* node->n = [value from arg?] */
-	node->prev = NULL;
-	node->next = NULL;
-
-	if (!*stack)
-	{
+		exit(EXIT_FAILURE);
+		} */
+	if (*stack == NULL)
 		node->next = NULL;
-		*stack = node;
-		return (*stack);
-	}
-	temp = *stack;
-	node->next = temp;
-	temp->next = node;
+	else
+		node->next = *stack;
+
 	*stack = node;
+	if (node->next)
+		node->next->prev = node;
 }
 
 /**
@@ -72,7 +66,8 @@ void print_stack(stack_t **stack, unsigned int line_number)
 
 	while (stack)
 	{
-		printf("%d\n", stack->n);
+		printf("help me print_stack");
+		/* printf("%d\n", stack->n); */
 		stack = stack->next;
 	}
 }

@@ -38,8 +38,10 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern int int_val;
+
 char **get_tokens(char *input);
-void (*get_function(char **token))(stack_t **head, unsigned int line_num);
+instruction_t *get_function(char **token);
 stack_t *create_newNode(int n);
 
 void push_onto_stack(stack_t **stack, unsigned int line_number);
@@ -61,5 +63,5 @@ void do_nothing(stack_t **stack, unsigned int line_number);
 		{"add", add_top2_of_stack},
 		{"nop", do_nothing},
 		{NULL, NULL}
-*/		
+*/
 #endif

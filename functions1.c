@@ -1,10 +1,10 @@
 #include "monty.h"
 
-/** 
+/**
  * get_tokens - breaks string into a two-level hierarchy of tokens
  * @input: line to split from file
  * Return: tokens for command and value
- */
+ **/
 char **get_tokens(char *input)
 {
 	int i;
@@ -36,7 +36,7 @@ char **get_tokens(char *input)
  * @opcode: function to search for
  * Return: pointer to opcode function
  **/
-void (*get_function(char **token))(stack_t **head, unsigned int line_num)
+instruction_t *get_function(char **token)
 {
 	instruction_t opcode_list[] = {
 		{"push", push_onto_stack},
@@ -51,6 +51,7 @@ void (*get_function(char **token))(stack_t **head, unsigned int line_num)
 			printf("woot woot\n");
 			return (opcode_list[i].f);
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token[0]);
-	exit(EXIT_FAILURE);
+	/* fprintf(stderr, "L%d: unknown instruction %s\n", line_num, token[0]); */
+	/* exit(EXIT_FAILURE); */
+	return (NULL);
 }
